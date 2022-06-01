@@ -5,7 +5,7 @@ import { fetchTables } from './redux/tablesRedux';
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => fetchTables(dispatch), [dispatch]);
+  useEffect(() => dispatch(fetchTables()), [dispatch]);
 
   return <div className='App'>Hello World!</div>;
 }

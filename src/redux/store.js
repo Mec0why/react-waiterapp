@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, combineReducers } from 'redux';
 import initialState from './initalState';
 import tablesReducer from './tablesRedux';
 
@@ -8,7 +7,7 @@ const subreducers = {
 };
 
 const reducer = combineReducers(subreducers);
-const store = configureStore(
+const store = createStore(
   reducer,
   initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

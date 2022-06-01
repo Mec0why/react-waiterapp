@@ -28,5 +28,7 @@
         "guestNumMax": "2",
         "bill": "0"
       }
-  ]
+  ],
+
+  "tableStatuses": ["Free", "Reserved", "Busy", "Cleaning"]
 }

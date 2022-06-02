@@ -1,4 +1,5 @@
 import { Row, Col, ListGroup, Button } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getAllTables } from '../../../redux/tablesRedux';
 import { useSelector } from 'react-redux';
@@ -30,6 +31,13 @@ const Tables = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+      {tablesList.length === 0 && (
+        <div className='d-flex justify-content-center'>
+          <Spinner animation='border' role='status'>
+            <span className='mx-auto visually-hidden'>Loading...</span>
+          </Spinner>
+        </div>
+      )}
     </Row>
   );
 };

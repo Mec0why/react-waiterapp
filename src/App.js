@@ -8,6 +8,7 @@ import Home from './components/views/Home/Home';
 import Header from './components/views/Header/Header';
 import Footer from './components/views/Footer/Footer';
 import NotFound from './components/views/NotFound/NotFound';
+import SingleTable from './components/features/SingleTable/SingleTable';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route exact path='/table/:tableId' element={'<SingleTable />'} />
+        <Route exact path='/table/:tableId' element={<SingleTable />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

@@ -5,12 +5,13 @@ import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getTableById } from '../../../redux/tablesRedux';
 import { getAllTableStatuses } from '../../../redux/tableStatusesRedux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const SingleTable = () => {
   const { tableId } = useParams();
   const tableData = useSelector((state) => getTableById(state, tableId));
   const allTableStatuses = useSelector((state) => getAllTableStatuses(state));
+  const navigate = useNavigate();
 
   const [tableStatus, setTableStatus] = useState(tableData.status || '');
   const [people, setPeople] = useState(tableData.peopleAmount || '');
@@ -19,6 +20,7 @@ const SingleTable = () => {
 
   const handleSubmit = () => {
     console.log('I Submitted');
+    navigate('/');
   };
 
   if (!tableData) return <Navigate to='/' />;
@@ -105,7 +107,9 @@ const SingleTable = () => {
               />
             </Col>
           </Form.Group>
-          <Button variant='primary'>Update</Button>
+          <Button variant='primary' type='submit'>
+            Update
+          </Button>
         </Form>
       </Container>
     );

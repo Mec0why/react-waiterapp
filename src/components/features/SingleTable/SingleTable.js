@@ -68,7 +68,10 @@ const SingleTable = () => {
               <Form.Select
                 value={tableStatus}
                 selected={tableStatus}
-                onChange={(e) => setTableStatus(e.target.value)}
+                onChange={(e) => {
+                  setTableStatus(e.target.value);
+                  setBill('0');
+                }}
               >
                 {allTableStatuses.map((status) => (
                   <option key={status} value={status}>
@@ -131,12 +134,12 @@ const SingleTable = () => {
             )}
             {errors.maxPeople && (
               <small className='d-block form-text text-danger mt-2'>
-                Max People amount cannot be greater than 10.
+                Max People amount cannot be lower than 0 and greater than 10.
               </small>
             )}
           </Form.Group>
 
-          {tableData.status === 'Busy' && (
+          {tableStatus === 'Busy' && (
             <Form.Group
               as={Row}
               className='mb-4 align-items-center'

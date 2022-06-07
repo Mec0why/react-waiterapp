@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getTableById, editTable } from '../../../redux/tablesRedux';
 import { getAllTableStatuses } from '../../../redux/tableStatusesRedux';
 import { useNavigate, Navigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const SingleTable = () => {
   const { tableId } = useParams();
@@ -18,19 +19,32 @@ const SingleTable = () => {
   const [people, setPeople] = useState(tableData.peopleAmount || '');
   const [maxPeople, setMaxPeople] = useState(tableData.maxPeopleAmount || '');
   const [bill, setBill] = useState(tableData.bill || '');
+  const [peopleError, setPeopleError] = useState(false);
+
+  const {
+    register,
+    handleSubmit: validate,
+    formState: { errors },
+  } = useForm();
 
   const handleSubmit = () => {
-    dispatch(
-      editTable({
-        status: tableStatus,
-        peopleAmount: people,
-        maxPeopleAmount: maxPeople,
-        bill: bill,
-        id: tableId,
-      })
-    );
-    console.log('I Submitted');
-    navigate('/');
+    if (people > maxPeople) {
+      setPeopleError(true);
+      console.log('Value Updated');
+      setPeople(maxPeople);
+    } else {
+      dispatch(
+        editTable({
+          status: tableStatus,
+          peopleAmount: people,
+          maxPeopleAmount: maxPeople,
+          bill: bill,
+          id: tableId,
+        })
+      );
+      console.log('I Submitted');
+      navigate('/');
+    }
   };
 
   if (!tableData) return <Navigate to='/' />;
@@ -41,7 +55,7 @@ const SingleTable = () => {
           <h1 className='m-0 align-self-center'>Table {tableData.id}</h1>
         </div>
 
-        <Form onSubmit={handleSubmit} className='col-md-8 my-4'>
+        <Form onSubmit={validate(handleSubmit)} className='col-md-8 my-4'>
           <Form.Group
             as={Row}
             className='mb-4 align-items-center'
@@ -75,6 +89,11 @@ const SingleTable = () => {
             </Col>
             <Col className='m-0 pe-2 col-auto'>
               <Form.Control
+                {...register('people', {
+                  required: true,
+                  min: 0,
+                  max: 10,
+                })}
                 type='text'
                 value={people}
                 placeholder='0'
@@ -87,6 +106,11 @@ const SingleTable = () => {
             </Col>
             <Col className='m-0 ps-2 col-auto'>
               <Form.Control
+                {...register('maxPeople', {
+                  required: true,
+                  min: 0,
+                  max: 10,
+                })}
                 type='text'
                 value={maxPeople}
                 placeholder='10'
@@ -94,6 +118,22 @@ const SingleTable = () => {
                 className={styles.people}
               />
             </Col>
+            {peopleError && !errors.people && !errors.maxPeople && (
+              <small className='d-block form-text text-danger mt-2'>
+                Value has been updated. <br />
+                People amount cannot be lower than Max People amount.
+              </small>
+            )}
+            {errors.people && (
+              <small className='d-block form-text text-danger mt-2'>
+                People amount cannot be lower than 0 and greater than 10.
+              </small>
+            )}
+            {errors.maxPeople && (
+              <small className='d-block form-text text-danger mt-2'>
+                Max People amount cannot be greater than 10.
+              </small>
+            )}
           </Form.Group>
 
           {tableData.status === 'Busy' && (

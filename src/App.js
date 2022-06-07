@@ -8,7 +8,7 @@ import Home from './components/views/Home/Home';
 import Header from './components/views/Header/Header';
 import Footer from './components/views/Footer/Footer';
 import NotFound from './components/views/NotFound/NotFound';
-import SingleTable from './components/features/SingleTable/SingleTable';
+import SingleTable from './components/features/UpdateTable/UpdateTable';
 
 function App() {
   const dispatch = useDispatch();

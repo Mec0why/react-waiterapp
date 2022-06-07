@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getAllTableStatuses } from '../../../redux/tableStatusesRedux';
 import { useForm } from 'react-hook-form';
+import TableFormStatuses from '../../views/TableFormStatuses/TableFormStatuses';
 
 const TableForm = ({ action, actionText, ...props }) => {
   const [tableStatus, setTableStatus] = useState(props.status || '');
@@ -41,31 +42,12 @@ const TableForm = ({ action, actionText, ...props }) => {
       </div>
 
       <Form onSubmit={validate(handleSubmit)} className='col-md-8 my-4'>
-        <Form.Group
-          as={Row}
-          className='mb-4 align-items-center'
-          controlId='formTableStatus'
-        >
-          <Col className='m-0 col-sm-2 col-form-label'>
-            <Form.Label className='m-0 fw-bold'>Status:</Form.Label>
-          </Col>
-          <Col className='m-0 col-sm-5'>
-            <Form.Select
-              value={tableStatus}
-              selected={tableStatus}
-              onChange={(e) => {
-                setTableStatus(e.target.value);
-                setBill('0');
-              }}
-            >
-              {allTableStatuses.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </Form.Select>
-          </Col>
-        </Form.Group>
+        <TableFormStatuses
+          tableStatus={tableStatus}
+          setTableStatus={setTableStatus}
+          setBill={setBill}
+          allTableStatuses={allTableStatuses}
+        />
 
         <Form.Group
           as={Row}

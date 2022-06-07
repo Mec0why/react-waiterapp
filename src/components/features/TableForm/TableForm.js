@@ -1,10 +1,11 @@
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getAllTableStatuses } from '../../../redux/tableStatusesRedux';
 import { useForm } from 'react-hook-form';
 import TableFormStatuses from '../../views/TableFormStatuses/TableFormStatuses';
 import TableFormPeople from '../../views/TableFormPeople/TableFormPeople';
+import TableFormBill from '../../views/TableFormBill/TableFormBill';
 
 const TableForm = ({ action, actionText, ...props }) => {
   const [tableStatus, setTableStatus] = useState(props.status || '');
@@ -60,26 +61,7 @@ const TableForm = ({ action, actionText, ...props }) => {
         />
 
         {tableStatus === 'Busy' && (
-          <Form.Group
-            as={Row}
-            className='mb-4 align-items-center'
-            controlId='formTableBill'
-          >
-            <Col className='m-0 col-sm-2 col-form-label'>
-              <Form.Label className='m-0 fw-bold'>Bill:</Form.Label>
-            </Col>
-            <Col className='m-0 col-auto'>
-              <Form.Text className='m-0 fs-6'>$</Form.Text>
-            </Col>
-            <Col className='m-0 col-auto'>
-              <Form.Control
-                type='number'
-                value={bill}
-                placeholder='0'
-                onChange={(e) => setBill(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
+          <TableFormBill bill={bill} setBill={setBill} />
         )}
 
         <Button variant='primary' type='submit'>

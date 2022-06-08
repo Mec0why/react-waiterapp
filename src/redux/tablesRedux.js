@@ -19,6 +19,27 @@ export const fetchTables = () => {
   };
 };
 
+export const editTableRequest = (table) => {
+  return (dispatch) => {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: table.status,
+        peopleAmount: table.peopleAmount,
+        maxPeopleAmount: table.maxPeopleAmount,
+        bill: table.bill,
+      }),
+    };
+
+    fetch(`http://localhost:3131/tables/${table.id}`, options).then(() =>
+      dispatch(editTable(table))
+    );
+  };
+};
+
 // action creators
 const tablesReducer = (statePart = [], action) => {
   switch (action.type) {

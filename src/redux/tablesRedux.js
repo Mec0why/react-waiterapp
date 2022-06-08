@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 //selectors
 export const getAllTables = (state) => state.tables;
 export const getTableById = ({ tables }, tableId) =>
@@ -55,3 +57,7 @@ const tablesReducer = (statePart = [], action) => {
 };
 
 export default tablesReducer;
+
+editTableRequest.propTypes = {
+  table: PropTypes.object.isRequired,
+};

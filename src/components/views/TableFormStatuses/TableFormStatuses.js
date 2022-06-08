@@ -1,4 +1,5 @@
 import { Row, Col, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const TableFormStatuses = (props) => {
   return (
@@ -16,9 +17,9 @@ const TableFormStatuses = (props) => {
           selected={props.tableStatus}
           onChange={(e) => {
             props.setTableStatus(e.target.value);
-            props.setBill('0');
+            props.setBill(0);
             if (e.target.value === 'Cleaning' || e.target.value === 'Free') {
-              props.setPeople('0');
+              props.setPeople(0);
             }
           }}
         >
@@ -34,3 +35,11 @@ const TableFormStatuses = (props) => {
 };
 
 export default TableFormStatuses;
+
+TableFormStatuses.propTypes = {
+  tableStatus: PropTypes.string.isRequired,
+  setTableStatus: PropTypes.func.isRequired,
+  setBill: PropTypes.func.isRequired,
+  allTableStatuses: PropTypes.array.isRequired,
+  setPeople: PropTypes.func.isRequired,
+};

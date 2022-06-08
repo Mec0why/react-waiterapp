@@ -6,12 +6,13 @@ import { useForm } from 'react-hook-form';
 import TableFormStatuses from '../../views/TableFormStatuses/TableFormStatuses';
 import TableFormPeople from '../../views/TableFormPeople/TableFormPeople';
 import TableFormBill from '../../views/TableFormBill/TableFormBill';
+import PropTypes from 'prop-types';
 
 const TableForm = ({ action, actionText, ...props }) => {
   const [tableStatus, setTableStatus] = useState(props.status || '');
-  const [people, setPeople] = useState(props.peopleAmount || '');
-  const [maxPeople, setMaxPeople] = useState(props.maxPeopleAmount || '');
-  const [bill, setBill] = useState(props.bill || '');
+  const [people, setPeople] = useState(props.peopleAmount || 0);
+  const [maxPeople, setMaxPeople] = useState(props.maxPeopleAmount || 0);
+  const [bill, setBill] = useState(props.bill || 0);
   const [peopleError, setPeopleError] = useState(false);
   const allTableStatuses = useSelector((state) => getAllTableStatuses(state));
 
@@ -74,3 +75,12 @@ const TableForm = ({ action, actionText, ...props }) => {
 };
 
 export default TableForm;
+
+TableForm.propTypes = {
+  action: PropTypes.func.isRequired,
+  actionText: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  peopleAmount: PropTypes.number.isRequired,
+  maxPeopleAmount: PropTypes.number.isRequired,
+  bill: PropTypes.number.isRequired,
+};

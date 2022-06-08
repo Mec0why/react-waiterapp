@@ -1,4 +1,5 @@
 import { Row, Col, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const TableFormBill = (props) => {
   return (
@@ -15,10 +16,10 @@ const TableFormBill = (props) => {
       </Col>
       <Col className='m-0 col-sm-5 col-md-3'>
         <Form.Control
-          type='number'
+          type='text'
           value={props.bill}
           placeholder='0'
-          onChange={(e) => props.setBill(e.target.value)}
+          onChange={(e) => props.setBill(parseInt(e.target.value || 0))}
         />
       </Col>
     </Form.Group>
@@ -26,3 +27,8 @@ const TableFormBill = (props) => {
 };
 
 export default TableFormBill;
+
+TableFormBill.propTypes = {
+  setBill: PropTypes.func.isRequired,
+  bill: PropTypes.number.isRequired,
+};

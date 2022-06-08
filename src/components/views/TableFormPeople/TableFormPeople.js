@@ -1,5 +1,6 @@
 import styles from '../TableFormPeople/TableFormPeople.module.scss';
 import { Row, Col, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const TableFormPeople = (props) => {
   return (
@@ -21,7 +22,7 @@ const TableFormPeople = (props) => {
           type='text'
           value={props.people}
           placeholder='0'
-          onChange={(e) => props.setPeople(e.target.value)}
+          onChange={(e) => props.setPeople(parseInt(e.target.value) || 0)}
           className={styles.people}
         />
       </Col>
@@ -38,7 +39,7 @@ const TableFormPeople = (props) => {
           type='text'
           value={props.maxPeople}
           placeholder='10'
-          onChange={(e) => props.setMaxPeople(e.target.value)}
+          onChange={(e) => props.setMaxPeople(parseInt(e.target.value) || 0)}
           className={styles.people}
         />
       </Col>
@@ -63,3 +64,13 @@ const TableFormPeople = (props) => {
 };
 
 export default TableFormPeople;
+
+TableFormPeople.propTypes = {
+  register: PropTypes.func.isRequired,
+  people: PropTypes.number.isRequired,
+  setPeople: PropTypes.func.isRequired,
+  maxPeople: PropTypes.number.isRequired,
+  setMaxPeople: PropTypes.func.isRequired,
+  peopleError: PropTypes.bool.isRequired,
+  errors: PropTypes.object.isRequired,
+};

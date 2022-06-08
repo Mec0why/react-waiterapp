@@ -48,6 +48,7 @@ const TableForm = ({ action, actionText, ...props }) => {
           setTableStatus={setTableStatus}
           setBill={setBill}
           allTableStatuses={allTableStatuses}
+          setPeople={setPeople}
         />
 
         <TableFormPeople

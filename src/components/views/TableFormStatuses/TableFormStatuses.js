@@ -17,6 +17,9 @@ const TableFormStatuses = (props) => {
           onChange={(e) => {
             props.setTableStatus(e.target.value);
             props.setBill('0');
+            if (e.target.value === 'Cleaning' || e.target.value === 'Free') {
+              props.setPeople('0');
+            }
           }}
         >
           {props.allTableStatuses.map((status) => (

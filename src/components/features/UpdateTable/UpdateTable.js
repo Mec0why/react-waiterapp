@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTableById, editTable } from '../../../redux/tablesRedux';
+import { getTableById, editTableRequest } from '../../../redux/tablesRedux';
 import { useNavigate, Navigate } from 'react-router-dom';
 import TableForm from '../TableForm/TableForm';
 
@@ -11,7 +11,7 @@ const UpdateTable = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (table) => {
-    dispatch(editTable({ ...table, id: tableId }));
+    dispatch(editTableRequest({ ...table, id: tableId }));
     navigate('/');
   };
 

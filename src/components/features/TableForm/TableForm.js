@@ -25,7 +25,6 @@ const TableForm = ({ action, actionText, ...props }) => {
   const handleSubmit = () => {
     if (people > maxPeople) {
       setPeopleError(true);
-      console.log('Value Updated');
       setPeople(maxPeople);
     } else {
       action({

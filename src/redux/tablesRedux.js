@@ -48,6 +48,7 @@ export const editTableRequest = (table) => {
       if (response.status === 200) {
         console.log('The Response is: ' + response.status);
         response.json().then(() => dispatch(editTable(table)));
+        dispatch(updatePending(false));
       }
     });
   };

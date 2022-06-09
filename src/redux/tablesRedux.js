@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { updatePending } from './pendingRedux';
+import { API_URL } from '../config';
 
 //selectors
 export const getAllTables = (state) => state.tables;
@@ -18,7 +19,7 @@ export const fetchTables = () => {
   return (dispatch) => {
     dispatch(updatePending(true));
 
-    fetch('http://localhost:3131/api/tables').then((res) => {
+    fetch(`${API_URL}/tables`).then((res) => {
       if (res.status === 200) {
         res.json().then((tables) => dispatch(updateTables(tables)));
         dispatch(updatePending(false));
@@ -43,14 +44,13 @@ export const editTableRequest = (table) => {
       }),
     };
 
-    fetch(`http://localhost:3131/tables/${table.id}`, options).then(
-      (response) => {
-        if (response.status === 200) {
-          console.log('The Response is: ' + response.status);
-          response.json().then(() => dispatch(editTable(table)));
-        }
+    fetch(`${API_URL}/tables/${table.id}`, options).then((response) => {
+      if (response.status === 200) {
+        console.log('The Response is: ' + response.status);
+        response.json().then(() => dispatch(editTable(table)));
+        dispatch(updatePending(false));
       }
-    );
+    });
   };
 };
 

@@ -1,3 +1,5 @@
+import { API_URL } from '../config';
+
 //selectors
 export const getAllTableStatuses = (state) => state.tableStatuses;
 
@@ -12,7 +14,7 @@ export const updateTableStatuses = (payload) => ({
 });
 export const fetchStatuses = () => {
   return (dispatch) => {
-    fetch('http://localhost:3131/api/tableStatuses')
+    fetch(`${API_URL}/tableStatuses`)
       .then((res) => res.json())
       .then((tableStatuses) => dispatch(updateTableStatuses(tableStatuses)));
   };
